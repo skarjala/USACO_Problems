@@ -1,0 +1,89 @@
+//package com.sandeep;
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader r = new BufferedReader( new FileReader("mixmilk.in"));
+        PrintWriter pw = new PrintWriter( new FileWriter("mixmilk.out"));
+        //Scanner sc = new Scanner(System.in);
+        StringTokenizer st = new StringTokenizer(r.readLine());
+        int c1 = Integer.parseInt(st.nextToken());
+        int amnt1 = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(r.readLine());
+        int c2 = Integer.parseInt(st.nextToken());
+        int amnt2 = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(r.readLine());
+        int c3 = Integer.parseInt(st.nextToken());
+        int amnt3 = Integer.parseInt(st.nextToken());
+        int i = 0;
+
+        while (i < 101) {
+            if (amnt2 + amnt1 > c2) {
+                amnt1 = amnt2 + amnt1 - c2;
+                amnt2 = c2;
+                i++;
+                if (i == 100) {
+                    pw.println(amnt1);
+                    pw.println(amnt2);
+                    pw.println(amnt3);
+                }
+            } else {
+                amnt2 = amnt2 + amnt1;
+                amnt1 = 0;
+                i++;
+                if (i == 100) {
+                    pw.println(amnt1);
+                    pw.println(amnt2);
+                    pw.println(amnt3);
+                }
+            }
+            if (amnt3 + amnt2 > c3) {
+                amnt2 = amnt2 + amnt3 - c3;
+                amnt3 = c3;
+                i++;
+                if (i == 100) {
+                    pw.println(amnt1);
+                    pw.println(amnt2);
+                    pw.println(amnt3);
+                }
+            } else {
+                amnt3 = amnt3 + amnt2;
+                amnt2 = 0;
+                i++;
+                if (i == 100) {
+                    pw.println(amnt1);
+                    pw.println(amnt2);
+                    pw.println(amnt3);
+                }
+            }
+            if (amnt1 + amnt3 > c1) {
+                amnt3 = amnt3 + amnt1 - c1;
+                amnt1 = c1;
+                i++;
+                if (i == 100) {
+                    pw.println(amnt1);
+                    pw.println(amnt2);
+                    pw.println(amnt3);
+                }
+            } else {
+                amnt1 = amnt1 + amnt3;
+                amnt3 = 0;
+                i++;
+                if (i == 100) {
+                    pw.println(amnt1);
+                    pw.println(amnt2);
+                    pw.println(amnt3);
+                }
+            }
+        }
+
+
+        r.close();
+        pw.close();
+
+
+    }
+}
