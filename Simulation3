@@ -1,0 +1,72 @@
+//package com.sandeep;
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader r = new BufferedReader( new FileReader("speeding.in"));
+        PrintWriter pw = new PrintWriter( new FileWriter("speeding.out"));
+        /*Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt(); */
+        StringTokenizer st = new StringTokenizer(r.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int[] road = new int[N];
+        int[] limit = new int[N];
+        int[] bessie = new int[M];
+        int[] speed = new int[M];
+
+        int maxDiff = 0;
+
+        st = new StringTokenizer(r.readLine());
+        road[0] = Integer.parseInt(st.nextToken());
+        limit[0] = Integer.parseInt(st.nextToken());
+
+
+        for(int i=1; i < N; i++) {
+            st = new StringTokenizer(r.readLine());
+            road[i] = road[i-1] + Integer.parseInt(st.nextToken());
+            limit[i] = Integer.parseInt(st.nextToken());
+        }
+
+        st = new StringTokenizer(r.readLine());
+        bessie[0] = Integer.parseInt(st.nextToken());
+        speed[0] = Integer.parseInt(st.nextToken());
+        for(int j=1; j < M; j++) {
+            st = new StringTokenizer(r.readLine());
+            bessie[j] = bessie[j-1] + Integer.parseInt(st.nextToken());
+            speed[j] = Integer.parseInt(st.nextToken());
+        }
+        int k = 0;
+        int a = 0;
+        int b = 0;
+
+        while(k < 100 && a < N) {
+            while (k < road[a]) {
+                if (k == bessie[b]) {
+                        b++;
+
+                }
+                if(speed[b] > limit[a]) {
+                    //maxDiff = speed[b] - limit[a];
+                    if (speed[b] - limit[a] > maxDiff) {
+                        maxDiff = speed[b]- limit[a];
+                    }
+                }
+                k++;
+
+            }
+
+            a++;
+        }
+        pw.print(maxDiff);
+
+        r.close();
+        pw.close();
+
+
+    }
+}
