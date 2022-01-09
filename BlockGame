@@ -1,0 +1,78 @@
+//package com.sandeep;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader r = new BufferedReader( new FileReader("blocks.in"));
+        PrintWriter pw = new PrintWriter( new FileWriter("blocks.out"));
+        StringTokenizer st = new StringTokenizer(r.readLine());
+
+        //Scanner sc = new Scanner(System.in);
+        int[] alpha = new int[26];
+        char[] key = new char[26];
+        key[0] = 'a';
+        key[1] = 'b';
+        key[2] = 'c';
+        key[3] = 'd';
+        key[4] = 'e';
+        key[5] = 'f';
+        key[6] = 'g';
+        key[7] = 'h';
+        key[8] = 'i';
+        key[9] = 'j';
+        key[10] = 'k';
+        key[11] = 'l';
+        key[12] = 'm';
+        key[13] = 'n';
+        key[14] = 'o';
+        key[15] = 'p';
+        key[16] = 'q';
+        key[17] = 'r';
+        key[18] = 's';
+        key[19] = 't';
+        key[20] = 'u';
+        key[21] = 'v';
+        key[22] = 'w';
+        key[23] = 'x';
+        key[24] = 'y';
+        key[25] = 'z';
+
+        int N = Integer.parseInt(st.nextToken());
+
+        for (int i=0; i < N; i++) {
+            st = new StringTokenizer(r.readLine());
+            String a = st.nextToken();
+            String b = st.nextToken();
+
+            for (int j=0; j < 26; j++) {
+                int count1 = 0;
+                int count2 = 0;
+                for (int x=0; x < a.length(); x++) {
+                    if (a.charAt(x) == key[j]) {
+                        count1++;
+                    }
+                }
+                for (int y=0; y < b.length(); y++) {
+                    if (b.charAt(y) == key[j]) {
+                        count2++;
+                    }
+                }
+
+                alpha[j] += Math.max(count1,count2);
+
+            }
+        }
+
+        for (int k=0; k < 26; k++) {
+            pw.println(alpha[k]);
+        }
+
+        r.close();
+        pw.close();
+
+    }
+}
