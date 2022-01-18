@@ -1,0 +1,70 @@
+//package com.sandeep;
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+	// write your code here
+
+        BufferedReader r = new BufferedReader(new FileReader("gymnastics.in"));
+        PrintWriter pw = new PrintWriter( new FileWriter("gymnastics.out"));
+        StringTokenizer st = new StringTokenizer(r.readLine());
+
+        /*
+        Scanner sc = new Scanner(System.in);
+        int K = sc.nextInt();
+        int N = sc.nextInt();
+         */
+
+        int K = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+
+        int[][] sto = new int[K][N];
+
+        for (int i=0; i < K; i++) {
+            st = new StringTokenizer(r.readLine());
+            for (int j=0; j < N; j++) {
+                sto[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+        int total = 0;
+        for (int i=0; i < N-1; i++) {
+            for (int j = i+1; j < N; j++) {
+                int[] pair = new int[2];
+                pair[0] = sto[0][i];
+                pair[1] = sto[0][j];
+                //System.out.println(pair[0]);
+                //System.out.println(pair[1]);
+                boolean b = true;
+                for (int z=1; z<K; z++) {
+                    int tmp1 = 0;
+                    int tmp2 = 0;
+                    for (; tmp1 < N; tmp1++) {
+                        if (sto[z][tmp1] == pair[0]) {
+                            //System.out.println(tmp1);
+                            break;
+                        }
+                    }
+                    for (; tmp2 < N; tmp2++) {
+                        if (sto[z][tmp2] == pair[1]) {
+                            //System.out.println(tmp2);
+                            break;
+                        }
+                    }
+                    if (tmp1 > tmp2) {
+                        b = false;
+                    }
+                }
+                if (b) {
+                    //System.out.println("pair found");
+                    total++;
+                }
+            }
+        }
+        pw.println(total);
+        r.close();
+        pw.close();
+
+    }
+}
