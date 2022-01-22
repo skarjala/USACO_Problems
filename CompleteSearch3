@@ -1,0 +1,74 @@
+//package com.sandeep;
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+	// write your code here
+
+        BufferedReader r = new BufferedReader(new FileReader("cownomics.in"));
+        PrintWriter pw = new PrintWriter( new FileWriter("cownomics.out"));
+        StringTokenizer st = new StringTokenizer(r.readLine());
+
+
+        //Scanner sc = new Scanner(System.in);
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        char[][] entire = new char[N * 2][M];
+        for (int i=0; i < 2*N; i++) {
+            st = new StringTokenizer(r.readLine());
+            String s = st.nextToken();
+            for (int j=0; j < M; j++) {
+                entire[i][j] = s.charAt(j);
+            }
+        }
+
+        char[][] spot = new char[N][M];
+        for (int i=0; i < N; i++) {
+            for (int j=0; j < M; j++) {
+                spot[i][j] = entire[i][j];
+            }
+        }
+
+        char[][] plain = new char[N][M];
+        int a = 0;
+        //int c = 0;
+        for (int i=N; i < 2 * N; i++) {
+            int c = 0;
+            if (a == N) {
+                break;
+            }
+            for (int j=0; j < M; j++) {
+                if (c == M) {
+                    break;
+                }
+                plain[a][c] = entire[i][j];
+                //System.out.print(plain[a][c]);
+                c++;
+            }
+            a++;
+        }
+
+        int total = 0;
+
+        for (int j=0; j < M; j++) {
+            boolean b = true;
+            for (int i=0; i < N; i++) {
+                for (int t=0; t < N; t++) {
+                    if (plain[t][j] == spot[i][j]) {
+                        b = false;
+                    }
+                }
+            }
+            if (b) {
+                total++;
+            }
+        }
+        pw.println(total);
+        r.close();
+        pw.close();
+
+    }
+}
